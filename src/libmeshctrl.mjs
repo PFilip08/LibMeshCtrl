@@ -1489,6 +1489,13 @@ class Session {
         })
     }
 
+    async powerOnAMT(nodeids, timeout=null) {
+        if (typeof(nodeids) === "string") { nodeids = [nodeids] }
+        return this._send_command({ action: 'poweraction', nodeids: nodeids, actiontype: 302 }, "powerOnAMT", timeout).then((data)=>{
+
+        })
+    }
+
     /** Reset given devices
      * @param {string|string[]} nodeids - Unique ids of nodes which to reset
      * @param {number?} [timeout=null] - duration in milliseconds to wait for a response before throwing an error
@@ -1499,6 +1506,11 @@ class Session {
     async reset_devices(nodeids, timeout=null) {
         if (typeof(nodeids) === "string") { nodeids = [nodeids] }
         return this._send_command({ action: 'poweraction', nodeids: nodeids, actiontype: 3 }, "reset_devices", timeout)
+    }
+
+    async resetAMT(nodeids, timeout=null) {
+        if (typeof(nodeids) === "string") { nodeids = [nodeids] }
+        return this._send_command({ action: 'poweraction', nodeids: nodeids, actiontype: 310 }, "resetAMT", timeout)
     }
 
     /** Sleep given devices
@@ -1523,6 +1535,11 @@ class Session {
     async power_off_devices(nodeids, timeout=null) {
         if (typeof(nodeids) === "string") { nodeids = [nodeids] }
         return this._send_command({ action: 'poweraction', nodeids: nodeids, actiontype: 2 }, "power_off_devices", timeout)
+    }
+
+    async powerOffAMT(nodeids, timeout=null) {
+        if (typeof(nodeids) === "string") { nodeids = [nodeids] }
+        return this._send_command({ action: 'poweraction', nodeids: nodeids, actiontype: 308 }, "powerOffAMT", timeout)
     }
 
     /** List device shares of given node. WARNING: Non namespaced call. Calling this function again before it returns may cause unintended consequences.
